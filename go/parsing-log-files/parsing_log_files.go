@@ -1,6 +1,7 @@
 package parsinglogfiles
 
 import (
+	"fmt"
 	"regexp"
 )
 
@@ -37,5 +38,14 @@ func RemoveEndOfLineText(text string) string {
 }
 
 func TagWithUserName(lines []string) []string {
-	//todo implement this
+	re := regexp.MustCompile(`User*\s+(\w+)`)
+
+	for i, line := range lines {
+		str := re.FindStringSubmatch(line)
+		if str != nil {
+			lines[i] = fmt.Sprintf("[USR] %s %s", str[1], line)
+		}
+	}
+
+	return lines
 }
