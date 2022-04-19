@@ -1,15 +1,21 @@
-// This is a "stub" file.  It's a little start on your solution.
-// It's not a complete solution though; you have to write some code.
+/*
+	Package twofer provides a function ShareWith() which prints a message.
 
-// Package twofer should have a package comment that summarizes what it's about.
-// https://golang.org/doc/effective_go.html#commentary
+	Example:
+		ShareWith("Eugen")
+		-> "One for Eugen, one for me."
+		ShareWith("")
+		-> "One for you, one for me."
+*/
 package twofer
 
-// ShareWith should have a comment documenting it.
+import "fmt"
+
+// ShareWith returns a formatted string based on the passed argument: "name".
 func ShareWith(name string) string {
-	// Write some code here to pass the test suite.
-	// Then remove all the stock comments.
-	// They're here to help you get started but they only clutter a finished solution.
-	// If you leave them in, reviewers may protest!
-	return ""
+	if name != "" {
+		return fmt.Sprintf("One for %s, one for me.", name)
+	}
+
+	return fmt.Sprint("One for you, one for me.")
 }
