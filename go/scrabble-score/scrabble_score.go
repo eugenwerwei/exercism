@@ -9,7 +9,9 @@
 
 package scrabble
 
-import "strings"
+import (
+	"unicode"
+)
 
 // Score returns a calculated number as an int,
 // based on a passed string argument.
@@ -21,18 +23,18 @@ func Score(word string) int {
 	score := 0
 
 	for _, r := range word {
-		switch strings.ToUpper(string(r)) {
-		case "D", "G":
+		switch unicode.ToUpper(r) {
+		case 'D', 'G':
 			score += 2
-		case "B", "C", "M", "P":
+		case 'B', 'C', 'M', 'P':
 			score += 3
-		case "F", "H", "V", "W", "Y":
+		case 'F', 'H', 'V', 'W', 'Y':
 			score += 4
-		case "K":
+		case 'K':
 			score += 5
-		case "J", "X":
+		case 'J', 'X':
 			score += 8
-		case "Q", "Z":
+		case 'Q', 'Z':
 			score += 10
 		default:
 			score++
