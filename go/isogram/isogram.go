@@ -1,24 +1,24 @@
+/*
+	Package isogram provides the function IsIsogram(),
+	to determine if a string is an isogram.
+
+	Example:
+		IsIsogram("background")
+		-> true
+*/
 package isogram
 
 import (
-	"sort"
 	"strings"
+	"unicode"
 )
 
+// IsIsogram returns true if a character in a word is unique.
 func IsIsogram(word string) bool {
-	if word == "" {
-		return true
-	}
+	s := strings.ToLower(word)
 
-	replacer := strings.NewReplacer("-", "", " ", "")
-	str := replacer.Replace(word)
-	str = strings.ToLower(str)
-
-	strArr := strings.Split(str, "")
-	sort.Strings(strArr)
-
-	for i := 0; i < len(strArr)-1; i++ {
-		if strArr[i] == strArr[i+1] {
+	for i, r := range s {
+		if unicode.IsLetter(r) && strings.ContainsRune(s[i+1:], r) {
 			return false
 		}
 	}
