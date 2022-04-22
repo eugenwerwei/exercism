@@ -8,29 +8,18 @@
 */
 package isogram
 
-import "strings"
+import (
+	"strings"
+	"unicode"
+)
 
 // IsIsogram returns true if a character in a word is unique.
 func IsIsogram(word string) bool {
-	if word == "" {
-		return true
-	}
+	s := strings.ToLower(word)
 
-	str := strings.ToLower(word)
-
-	for i := 0; i < len(str)-1; i++ {
-		if string(str[i]) == " " || string(str[i]) == "-" {
-			continue
-		}
-
-		for j := i + 1; j < len(str); j++ {
-			if string(str[j]) == " " || string(str[j]) == "-" {
-				continue
-			}
-
-			if string(str[i]) == string(str[j]) {
-				return false
-			}
+	for i, r := range s {
+		if unicode.IsLetter(r) && strings.ContainsRune(s[i+1:], r) {
+			return false
 		}
 	}
 
