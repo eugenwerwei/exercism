@@ -1,3 +1,12 @@
+/*
+	Package luhn provides a function Valid(),
+	to validate numbers based on the Luhn Algorithm.
+
+	Example:
+		Valid("8569 6195 0383 3437")
+		-> true
+*/
+
 package luhn
 
 import (
@@ -6,6 +15,7 @@ import (
 	"unicode"
 )
 
+// Valid returns true if a string passes the conditions of Luhn Algorithm.
 func Valid(id string) bool {
 	len := len(id)
 
@@ -38,7 +48,6 @@ func Valid(id string) bool {
 				sum += digit
 			}
 		} else {
-
 			sum += digit
 		}
 
