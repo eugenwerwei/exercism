@@ -17,18 +17,16 @@ import (
 
 // Valid returns true if a string passes the conditions of Luhn Algorithm.
 func Valid(id string) bool {
-	len := len(id)
-
 	id = strings.TrimSpace(id)
 
-	if len < 2 || id == "0" {
+	if len(id) < 2 || id == "0" {
 		return false
 	}
 
 	sum := 0
 	isSecond := false
 
-	for i := len - 1; i >= 0; i-- {
+	for i := len(id) - 1; i >= 0; i-- {
 		if unicode.IsLetter(rune(id[i])) {
 			return false
 		}
@@ -40,12 +38,10 @@ func Valid(id string) bool {
 		digit, _ := strconv.Atoi(string(id[i]))
 
 		if isSecond {
-			digit = digit * 2
-
-			if digit > 9 {
-				sum += digit - 9
+			if digit*2 > 9 {
+				sum += digit*2 - 9
 			} else {
-				sum += digit
+				sum += digit * 2
 			}
 		} else {
 			sum += digit
